@@ -10,6 +10,8 @@ import 'package:scholar_chat/functions/show_snack_bar_message.dart';
 import 'package:scholar_chat/views/chat_view.dart';
 import 'package:scholar_chat/views/sign_up_view.dart';
 
+import '../cubits/chat_cubit/chat_cubit.dart';
+
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
@@ -28,6 +30,7 @@ class SignInView extends StatelessWidget {
           isLoading = true;
         } else if (state is SignInSuccess) {
           showSnackBar(context, "Success");
+          BlocProvider.of<ChatCubit>(context).getMessages();
           Navigator.pushNamed(context, ChatView.id, arguments: email);
           isLoading = false;
         } else if (state is SignInFailure) {
